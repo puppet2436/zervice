@@ -1,0 +1,18 @@
+package name.zeno.zervice.aop;
+
+import org.apache.log4j.Logger;
+import org.nutz.aop.InterceptorChain;
+import org.nutz.ioc.loader.annotation.IocBean;
+
+@SuppressWarnings({"WeakerAccess", "unused"})
+@IocBean
+public class ServiceLog extends MethodLog
+{
+  Logger logger = Logger.getLogger(ServiceLog.class);
+
+  @Override
+  public void filter(InterceptorChain chain) throws Throwable
+  {
+    logger.debug(super.buildMethodArgsReturn(chain));
+  }
+}
