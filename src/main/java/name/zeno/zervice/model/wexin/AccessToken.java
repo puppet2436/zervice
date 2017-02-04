@@ -9,7 +9,7 @@ import org.nutz.json.JsonField;
 public class AccessToken extends BaseModel
 {
 
-  public static final String SCOPE_BASE      = "snsapi_base";
+  public static final String SCOPE_BASE = "snsapi_base";
   public static final String SCOPE_USER_INFO = "snsapi_userinfo";
 
   @JsonField("unionid")
@@ -26,7 +26,7 @@ public class AccessToken extends BaseModel
   private String refreshToken;
 
   @JsonField("errcode")
-  private int    errCode;
+  private int errCode;
   @JsonField("errmsg")
   private String errMsg;
 

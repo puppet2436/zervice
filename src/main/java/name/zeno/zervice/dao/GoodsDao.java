@@ -12,42 +12,42 @@ import java.util.List;
 @IocBean
 public class GoodsDao
 {
-    @Inject
-    private NutDao dao;
+  @Inject
+  private NutDao dao;
 
-    private final Class<Goods> clazz = Goods.class;
+  private final Class<Goods> clazz = Goods.class;
 
-    public Goods insert(Goods goods)
-    {
-        dao.insert(goods);
-        return dao.fetch(goods);
-    }
+  public Goods insert(Goods goods)
+  {
+    dao.insert(goods);
+    return dao.fetch(goods);
+  }
 
-    public Goods update(Goods goods)
-    {
-        dao.update(goods);
-        return dao.fetch(goods);
-    }
+  public Goods update(Goods goods)
+  {
+    dao.update(goods);
+    return dao.fetch(goods);
+  }
 
-    public List<Goods> query()
-    {
-        return dao.query(clazz, null);
-    }
+  public List<Goods> query()
+  {
+    return dao.query(clazz, null);
+  }
 
-    public int delete(long goodsId)
-    {
-        return dao.delete(clazz, goodsId);
-    }
+  public int delete(long goodsId)
+  {
+    return dao.delete(clazz, goodsId);
+  }
 
 
-    private @NotNull Cnd buildGoodsIdCnd(long goodsId)
-    {
-        return Cnd.where("goods_id", "=", goodsId);
-    }
+  private @NotNull Cnd buildGoodsIdCnd(long goodsId)
+  {
+    return Cnd.where("goods_id", "=", goodsId);
+  }
 
-    private @NotNull Cnd buildGoodsIdCnd(Goods goods)
-    {
-        return buildGoodsIdCnd(goods.getGoodsId());
-    }
+  private @NotNull Cnd buildGoodsIdCnd(Goods goods)
+  {
+    return buildGoodsIdCnd(goods.getGoodsId());
+  }
 
 }

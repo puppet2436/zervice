@@ -4,20 +4,17 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'war'
 
-//sourceCompatibility = 1.5
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'junit:junit:4.11'
 
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.jetbrains:annotations:15.0'
 
-    testCompile 'junit:junit:4.11'
-    compile 'org.nutz:nutz:1.r.56'
+    compile 'org.nutz:nutz:1.r.59'
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'org.dom4j:dom4j:2.0.0'
     compile 'jaxen:jaxen:1.1.6'
@@ -27,4 +24,7 @@ dependencies {
     compile 'commons-dbcp:commons-dbcp:1.4'
     compile 'commons-logging:commons-logging:1.2'
     compile 'commons-pool:commons-pool:1.6'
+
+    //结巴分词 https://github.com/huaban/jieba-analysis
+    compile 'com.huaban:jieba-analysis:1.0.2'
 }
