@@ -33,7 +33,7 @@ public class ZerviceSetup implements Setup
       String token     = (String) properties.get("token");
       String appId     = (String) properties.get("app_id");
       String appSecret = (String) properties.get("app_secret");
-      WeixinConf.init(token, appId, appSecret);
+      WeixinConf.Companion.init(token, appId, appSecret);
       logger.info(WeixinConf.getInstance());
     } catch (IOException e) {
       throw new RuntimeException("初始化微信公众号配置异常", e);

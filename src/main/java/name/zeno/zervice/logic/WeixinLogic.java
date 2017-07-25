@@ -52,7 +52,7 @@ public class WeixinLogic
     if (signature == null || timestamp == null || nonce == null)
       return false;
 
-    String[] str = {WeixinConf.getInstance().TOKEN, timestamp, nonce};
+    String[] str = {WeixinConf.getInstance().getTOKEN(), timestamp, nonce};
     Arrays.sort(str); // 字典序排序
     String bigStr = str[0] + str[1] + str[2];
     // SHA1加密
@@ -125,9 +125,9 @@ public class WeixinLogic
     User user;
 
     WeixinConf  conf  = WeixinConf.getInstance();
-    AccessToken token = weixinService.getUserAccessToken(conf.APP_ID, conf.APP_SECRET, code);
-    if (ErrorCode.ERROR_00000.code != token.getErrCode()) {
-      throw new LogicException(ErrorCode.getDescByCode(token.getErrCode()), token.getErrCode());
+    AccessToken token = weixinService.getUserAccessToken(conf.getAPP_ID(), conf.getAPP_SECRET(), code);
+    if (ErrorCode.ERROR_00000.getCode() != token.getErrCode()) {
+      throw new LogicException(ErrorCode.Companion.getDescByCode(token.getErrCode()), token.getErrCode());
     }
     UserAuth auth = userAuthLogic.getWechatAuth(token.getOpenId());
     if (auth != null) {
@@ -136,7 +136,7 @@ public class WeixinLogic
       //if access token 过期,刷新 access token
       if (auth.getUpdatedAt().getTime() + 7200000 < System.currentTimeMillis()) {
         AccessToken newToken = weixinService.refreshToken(
-            WeixinConf.getInstance().APP_ID, auth.getRefreshToken());
+            WeixinConf.getInstance().getAPP_ID(), auth.getRefreshToken());
         auth.setCredential(token.getAccessToken());
         auth.setRefreshToken(token.getRefreshToken());
         userAuthLogic.update(auth);
@@ -150,7 +150,7 @@ public class WeixinLogic
         userLogic.createUser(u);
 
         UserAuth au = new UserAuth();
-        au.setIdentityType(IdentityType.WEIXIN.code);
+        au.setIdentityType(IdentityType.WEIXIN.getCode());
         au.setIdentifier(token.getOpenId());
         au.setCredential(token.getAccessToken());
         au.setRefreshToken(token.getRefreshToken());
@@ -191,7 +191,7 @@ public class WeixinLogic
       synchronized (WeixinConf.class) {
         if (wxConf.isAccessTokenExpired()) {
           AccessToken token =
-              weixinService.getBaseAccessToken(wxConf.APP_ID, wxConf.APP_SECRET);
+              weixinService.getBaseAccessToken(wxConf.getAPP_ID(), wxConf.getAPP_SECRET());
           baseAccessToken = token.getAccessToken();
           wxConf.setAccessToken(baseAccessToken);
         } else {

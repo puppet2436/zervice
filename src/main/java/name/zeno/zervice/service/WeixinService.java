@@ -71,7 +71,7 @@ public class WeixinService
     WXUser user = Json.fromJson(WXUser.class, Http.get(url, 2000).getContent());
     if (user.getErrorCode() != null) {
       int errorCode = user.getErrorCode();
-      throw new LogicException(ErrorCode.getDescByCode(errorCode), errorCode);
+      throw new LogicException(ErrorCode.Companion.getDescByCode(errorCode), errorCode);
     }
 
     return user;

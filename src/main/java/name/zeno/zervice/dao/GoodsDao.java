@@ -39,13 +39,14 @@ public class GoodsDao
     return dao.delete(clazz, goodsId);
   }
 
-
-  private @NotNull Cnd buildGoodsIdCnd(long goodsId)
+  @NotNull
+  private Cnd buildGoodsIdCnd(long goodsId)
   {
     return Cnd.where("goods_id", "=", goodsId);
   }
 
-  private @NotNull Cnd buildGoodsIdCnd(Goods goods)
+  @NotNull
+  private Cnd buildGoodsIdCnd(Goods goods)
   {
     return buildGoodsIdCnd(goods.getGoodsId());
   }
